@@ -1,0 +1,67 @@
+.App {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+.stat-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: none;
+  border-radius: 10px;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+}
+
+.card {
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.btn {
+  border-radius: 8px;
+}
+
+.form-control, .form-select {
+  border-radius: 8px;
+}
+
+.alert {
+  border-radius: 8px;
+  border: none;
+}
+
+.table th {
+  border-top: none;
+  font-weight: 600;
+}
+
+.login-page, .register-page {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+}
+
+.profile-page .form-control:disabled {
+  background-color: #f8f9fa;
+  color: #6c757d;
+}
+
+/* Loading spinner customization */
+.spinner-border {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* Badge customization */
+.badge {
+  font-size: 0.75em;
+  padding: 0.35em 0.65em;
+}
