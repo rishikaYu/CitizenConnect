@@ -16,51 +16,27 @@ dotenv.config();
 // Initialize Express app
 const app = express();
 
-// In your server.js - Replace your current CORS setup with this:
 
 const corsOptions = {
   origin: (origin, callback) => {
-    // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
-    
-    // List of allowed origins - UPDATED FOR PRODUCTION
-    const allowedOrigins = [
-      'http://localhost:3000',
-      'http://127.0.0.1:3000',
-      'https://citizenconnect-9.onrender.com', // Your backend URL
-      '/\.onrender\.com$/', // Any Render.com subdomain
-      '/\.vercel\.app$/',   // Any Vercel subdomain - THIS IS CRITICAL
-      '/\.vercel\.app$/',
-      'https://citizen-connect-fy27zwnm9-rishika-akunurus-projects.vercel.app', // Your specific Vercel URL
-      'https://citizen-connect.vercel.app' // Your main domain if you have one
-    ];
-    
-    // Check if the origin is allowed
-    if (allowedOrigins.some(allowed => {
-      if (typeof allowed === 'string') {
-        return origin === allowed;
-      }
-      if (allowed instanceof RegExp) {
-        return allowed.test(origin);
-      }
-      return false;
-    })) {
-      console.log('✅ CORS allowed for origin:', origin);
+    if (origin === 'http://localhost:3000' || origin.endsWith('.vercel.app')) {
       callback(null, true);
     } else {
-      console.log('🚫 CORS blocked origin:', origin);
       callback(new Error('Not allowed by CORS'));
     }
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
-  optionsSuccessStatus: 200
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 };
 
-// Apply CORS
+// Apply CORS for all routes and all methods
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions)); // Handle preflight for all routes
+
+// Ensure OPTIONS requests get proper headers
+app.options('*', cors(corsOptions));
+
 // Define PORT and HOST
 const PORT = process.env.PORT || 5001;
 //const HOST = '0.0.0.0';// Get __dirname equivalent for ES modules
@@ -215,27 +191,18 @@ app.use('/api/admin', authenticateToken, authorizeAdmin, adminRoutes);
 // ========================
 
 // Health check
-// Update your health endpoint in server.js
 app.get('/api/health', (req, res) => {
-  try {
-    res.json({ 
-      status: 'OK', 
-      message: 'Server is running',
-      timestamp: new Date().toISOString(),
-      version: '1.0.0',
-      cors: {
-        enabled: true,
-        allowedOrigins: ['localhost:3000', '.onrender.com', '.vercel.app']
-      }
-    });
-  } catch (error) {
-    console.error('Health check error:', error);
-    res.status(500).json({ 
-      status: 'ERROR', 
-      message: 'Health check failed',
-      error: error.message 
-    });
-  }
+  res.json({ 
+    status: 'OK', 
+    message: 'Server is running',
+    timestamp: new Date().toISOString(),
+    version: '1.0.0',
+    staticFiles: {
+      uploads: '/uploads',
+      directory: uploadsDir,
+      totalFiles: fs.readdirSync(uploadsDir).length
+    }
+  });
 });
 
 // Test endpoints
