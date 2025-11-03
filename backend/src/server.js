@@ -18,7 +18,7 @@ const app = express();
 
 // Define PORT and HOST
 const PORT = process.env.PORT || 5001;
-const HOST = '0.0.0.0';// Get __dirname equivalent for ES modules
+//const HOST = '0.0.0.0';// Get __dirname equivalent for ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -314,24 +314,15 @@ app.use((error, req, res, next) => {
 // ========================
 
 // Start server
-app.listen(PORT, HOST, () => {
+app.listen(PORT, () => {
   console.log('='.repeat(60));
   console.log('🚀 CITIZEN APP BACKEND SERVER STARTED SUCCESSFULLY');
   console.log('='.repeat(60));
-  console.log(`📍 Server URL:    http://${HOST}:${PORT}`);
-  console.log(`📍 Local:         http://localhost:${PORT}`);
+  console.log(`📍 Server URL:    http://<your-render-url> or http://0.0.0.0:${PORT}`);
   console.log(`🌐 Environment:   ${process.env.NODE_ENV || 'development'}`);
-  console.log('');
-  console.log('📁 STATIC FILE SERVING:');
-  console.log(`   Uploads Path:  ${uploadsDir}`);
-  console.log(`   Access URL:    http://localhost:${PORT}/uploads/{filename}`);
-  console.log(`   Current files: ${fs.readdirSync(uploadsDir).length} files`);
-  console.log('');
+  console.log(`📁 STATIC FILE SERVING: Uploads Path: ${uploadsDir}`);
   console.log('🛣️  AVAILABLE ENDPOINTS:');
   console.log('   GET  /api/health          - Health check');
-  console.log('   GET  /api/debug-uploads   - Check uploads directory');
-  console.log('   GET  /api/debug-file/:file - Check specific file');
-  console.log('   GET  /api/test-static     - Test static files');
   console.log('   POST /api/auth/register   - User registration');
   console.log('   POST /api/auth/login      - User login');
   console.log('   GET  /api/auth/verify     - Token verification');
@@ -343,5 +334,3 @@ app.listen(PORT, HOST, () => {
   console.log('   PUT  /api/admin/requests/:id/status - Update status');
   console.log('='.repeat(60));
 });
-
-export default app;
