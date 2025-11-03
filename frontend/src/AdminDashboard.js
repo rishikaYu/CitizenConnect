@@ -30,7 +30,7 @@ const AdminDashboard = ({ user }) => {
         return;
       }
 
-      let apiUrl = `http://localhost:5001/api/admin/requests?page=${currentPage}&limit=10`;
+let apiUrl = `${API_URL}/api/admin/requests?page=${currentPage}&limit=10`;
       
       if (statusFilter !== 'all') {
         apiUrl += `&status=${statusFilter}`;
@@ -76,7 +76,7 @@ const AdminDashboard = ({ user }) => {
       const token = localStorage.getItem('token');
       if (!token) return;
 
-      const response = await fetch('http://localhost:5001/api/admin/stats', {
+const response = await fetch(`${API_URL}/api/admin/stats`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -99,7 +99,7 @@ const AdminDashboard = ({ user }) => {
       setDetailsLoading(true);
       const token = localStorage.getItem('token');
       
-      const response = await fetch(`http://localhost:5001/api/admin/requests/${requestId}`, {
+const response = await fetch(`${API_URL}/api/admin/requests/${requestId}`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -125,7 +125,7 @@ const AdminDashboard = ({ user }) => {
   const updateRequestStatus = async (requestId, newStatus) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:5001/api/admin/requests/${requestId}/status`, {
+const response = await fetch(`${API_URL}/api/admin/requests/${requestId}/status`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -629,7 +629,7 @@ const AdminDashboard = ({ user }) => {
         </div> */}
 
         <img 
-          src={`http://localhost:5001/${selectedRequest.image_path}`}
+  src={`${API_URL}/${selectedRequest.image_path}`}
           alt="Request attachment" 
           className="img-fluid rounded border"
           style={{ 
@@ -637,7 +637,7 @@ const AdminDashboard = ({ user }) => {
             maxWidth: '100%',
             cursor: 'pointer'
           }}
-          onClick={() => window.open(`http://localhost:5001/${selectedRequest.image_path}`, '_blank')}
+  onClick={() => window.open(`${API_URL}/${selectedRequest.image_path}`, '_blank')}
           onError={(e) => {
             console.error('❌ Image failed to load:', selectedRequest.image_path);
             e.target.style.display = 'none';
@@ -651,9 +651,9 @@ const AdminDashboard = ({ user }) => {
               <small>Server path: ${selectedRequest.image_path}</small><br>
               <small class="text-muted">The file might not exist in the uploads directory</small>
               <br>
-              <a href="http://localhost:5001/api/debug-uploads" target="_blank" class="btn btn-sm btn-outline-info mt-2">
+              <!-- <a href="http://localhost:5001/api/debug-uploads" target="_blank" class="btn btn-sm btn-outline-info mt-2">
                 Check Uploads Directory
-              </a>
+              </a> -->
             `;
             e.target.parentNode.appendChild(errorMsg);
           }}
@@ -719,7 +719,7 @@ const debugImage = (imagePath) => {
     return null;
   }
   
-  const imageUrl = `http://localhost:5001/${imagePath}`;
+const imageUrl = `${API_URL}/${imagePath}`;
   
   console.log('🖼️ Image Debug Info:');
   console.log('Original path:', imagePath);

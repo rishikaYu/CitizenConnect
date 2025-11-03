@@ -26,36 +26,37 @@ const ChangePassword = ({ onClose }) => {
     setIsSubmitting(true);
     setMessage('');
 
-    try {
-      const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5001/api/auth/change-password', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify({
-          currentPassword: formData.currentPassword,
-          newPassword: formData.newPassword
-        })
-      });
+  try {
+  const token = localStorage.getItem('token');
+  const response = await fetch(`${process.env.REACT_APP_API_URL}/auth/change-password`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+    body: JSON.stringify({
+      currentPassword: formData.currentPassword,
+      newPassword: formData.newPassword
+    })
+  });
 
-      const result = await response.json();
-      
-      if (response.ok) {
-        setMessage('✅ Password changed successfully!');
-        setFormData({
-          currentPassword: '',
-          newPassword: '',
-          confirmPassword: ''
-        });
-        setTimeout(() => {
-          onClose();
-        }, 2000);
-      } else {
-        setMessage(`❌ ${result.message}`);
-      }
-    } catch (error) {
+  const result = await response.json();
+
+  if (response.ok) {
+    setMessage('✅ Password changed successfully!');
+    setFormData({
+      currentPassword: '',
+      newPassword: '',
+      confirmPassword: ''
+    });
+    setTimeout(() => {
+      onClose();
+    }, 2000);
+  } else {
+    setMessage(`❌ ${result.message}`);
+  }
+}
+catch (error) {
       console.error('Change password error:', error);
       setMessage('❌ Network error. Please try again.');
     } finally {

@@ -27,25 +27,26 @@ const ResetPassword = () => {
     setMessage('');
 
     try {
-      const response = await fetch(`http://localhost:5001/api/auth/reset-password/${token}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ password })
-      });
+  const response = await fetch(`${process.env.REACT_APP_API_URL}/auth/reset-password/${token}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ password })
+  });
 
-      const result = await response.json();
-      
-      if (response.ok) {
-        setMessage('✅ Password reset successfully! Redirecting to login...');
-        setTimeout(() => {
-          navigate('/login');
-        }, 2000);
-      } else {
-        setMessage(`❌ ${result.message}`);
-      }
-    } catch (error) {
+  const result = await response.json();
+
+  if (response.ok) {
+    setMessage('✅ Password reset successfully! Redirecting to login...');
+    setTimeout(() => {
+      navigate('/login');
+    }, 2000);
+  } else {
+    setMessage(`❌ ${result.message}`);
+  }
+} 
+catch (error) {
       console.error('Reset password error:', error);
       setMessage('❌ Network error. Please try again.');
     } finally {

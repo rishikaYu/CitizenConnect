@@ -49,7 +49,7 @@ const ForgotPassword = () => {
     setMessage('');
 
     try {
-      const response = await fetch('http://localhost:5001/api/auth/forgot-password', {
+const response = await fetch(`${API_URL}/api/auth/forgot-password`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -163,7 +163,7 @@ const ResetPassword = () => {
     setMessage('');
 
     try {
-      const response = await fetch(`http://localhost:5001/api/auth/reset-password/${token}`, {
+const response = await fetch(`${API_URL}/api/auth/reset-password/${token}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -277,7 +277,7 @@ const EmailVerification = () => {
 
   const verifyEmail = async () => {
     try {
-      const response = await fetch(`http://localhost:5001/api/auth/verify-email/${token}`);
+      const response = await fetch(`${API_URL}/api/auth/verify-email/${token}`);
       const result = await response.json();
       
       if (response.ok) {
@@ -361,7 +361,7 @@ const ChangePassword = ({ onClose }) => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5001/api/auth/change-password', {
+const response = await fetch(`${API_URL}/api/auth/change-password`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -547,7 +547,7 @@ const Dashboard = ({ user }) => {
       }
 
       console.log('🔍 Fetching user requests...');
-      const response = await fetch('http://localhost:5001/api/citizen/requests', {
+const response = await fetch(`${API_URL}/api/citizen/requests`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -803,7 +803,7 @@ const ServiceRequest = () => {
 
     console.log('📤 Sending FormData with image support...');
     
-    const response = await fetch('http://localhost:5001/api/citizen/requests', {
+const response = await fetch(`${API_URL}/api/citizen/requests`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -1169,7 +1169,7 @@ const Login = ({ onLogin }) => {
     try {
       console.log('🚀 Attempting login with REAL backend API...');
       
-      const response = await fetch('http://localhost:5001/api/auth/login', {
+const response = await fetch(`${API_URL}/api/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -1346,7 +1346,7 @@ const Register = ({ onRegister }) => {
     try {
       console.log('🚀 Attempting registration with REAL backend API...');
       
-      const response = await fetch('http://localhost:5001/api/auth/register', {
+const response = await fetch(`${API_URL}/api/auth/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

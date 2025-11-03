@@ -12,24 +12,25 @@ const ForgotPassword = () => {
     setIsSubmitting(true);
     setMessage('');
 
-    try {
-      const response = await fetch('http://localhost:5001/api/auth/forgot-password', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email })
-      });
+   try {
+  const response = await fetch(`${process.env.REACT_APP_API_URL}/auth/forgot-password`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ email })
+  });
 
-      const result = await response.json();
-      
-      if (response.ok) {
-        setMessage('✅ If the email exists, a password reset link has been sent');
-        setEmail('');
-      } else {
-        setMessage(`❌ ${result.message}`);
-      }
-    } catch (error) {
+  const result = await response.json();
+  
+  if (response.ok) {
+    setMessage('✅ If the email exists, a password reset link has been sent');
+    setEmail('');
+  } else {
+    setMessage(`❌ ${result.message}`);
+  }
+}
+ catch (error) {
       console.error('Forgot password error:', error);
       setMessage('❌ Network error. Please try again.');
     } finally {
