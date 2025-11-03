@@ -1,6 +1,6 @@
 # Node modules
 node_modules/
-
+backend/test-db.js
 # Environment variables
 .env
 .env.local
