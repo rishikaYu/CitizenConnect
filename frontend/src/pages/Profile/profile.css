@@ -1,0 +1,17 @@
+.profile-page .card {
+  border-radius: 12px;
+}
+
+.profile-page .form-control:disabled {
+  background-color: #f8f9fa;
+  color: #6c757d;
+}
+
+.profile-page .card-title {
+  color: #495057;
+  font-weight: 600;
+}
+
+.profile-page .btn-outline-primary {
+  border-radius: 8px;
+}
