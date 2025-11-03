@@ -21,9 +21,8 @@ const corsOptions = {
   origin: [
     'http://localhost:3000',
     'http://127.0.0.1:3000',
-    'https://citizen-connect-nu.vercel.app',   // your frontend deployed
-    'https://citizen-connect-bxl4q4l2t-rishika-akunurus-projects.vercel.app' // ✅ allow backend origin too
-  ],
+    'https://citizen-connect-nu.vercel.app',   // frontend deployed
+'https://*.vercel.app',     ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
