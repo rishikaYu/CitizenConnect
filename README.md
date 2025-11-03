@@ -7,8 +7,8 @@ Citizen Service Request Management System based on React, Node.js, and PostgreSQ
 A full-stack web application that enables citizens to submit municipal service requests and allows administrators to review, manage, and resolve these requests efficiently. The system improves communication between citizens and local authorities while ensuring transparency and accountability.
 
 ## Live Demo
-Frontend: https://YOUR_FRONTEND_URL  
-Backend API: https://YOUR_BACKEND_URL
+Frontend:https://citizen-connect-ghjt-klyhl1mi6-rishika-akunurus-projects.vercel.app/login
+Backend API:https://citizenconnect-9.onrender.com
 
 ## Features
 
@@ -31,7 +31,7 @@ Backend API: https://YOUR_BACKEND_URL
 | Frontend | React.js, React Router, Bootstrap, Axios |
 | Backend | Node.js, Express.js, Multer, JWT Authentication |
 | Database | PostgreSQL |
-| Deployment | Vercel (Frontend), Render(Backend), Neon/Supabase (Database) |
+| Deployment | Vercel (Frontend), Render(Backend), Neon (Database) |
 
 React Frontend → Express REST API → PostgreSQL Database
 ## Installation
