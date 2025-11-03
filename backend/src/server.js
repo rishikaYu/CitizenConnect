@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url';
 import fs from 'fs';
 
 
-import { pool } from "/Users/rishikaakunuru/Desktop/Web Dev/citizen-app/backend/src/config/database.js";
+import { pool } from "./config/database.js";
 
 
 
