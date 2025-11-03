@@ -18,8 +18,7 @@ const app = express();
 
 // Define PORT and HOST
 const PORT = process.env.PORT || 5001;
-const HOST = process.env.HOST || 'localhost';
-
+const HOST = process.env.NODE_ENV === 'production' ? '0.0.0.0' : 'localhost';
 // Get __dirname equivalent for ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
