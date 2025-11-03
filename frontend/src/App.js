@@ -2,7 +2,7 @@ import React, { useState, useEffect, createContext } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, Link, useLocation, useParams, useNavigate } from 'react-router-dom';
 import AdminDashboard from './AdminDashboard.js';
 const AuthContext = createContext();
-const API_URL = process.env.REACT_APP_API_URL || 'https://citizenconnect-9.onrender.com';
+const API_URL = process.env.REACT_APP_API_URL;
 
 // Mock service
 const mockService = {
@@ -50,7 +50,7 @@ const ForgotPassword = () => {
     setMessage('');
 
     try {
-const response = await fetch(`${API_URL}/api/auth/forgot-password`, {
+      const response = await fetch(`${API_URL}/auth/forgot-password`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -164,7 +164,7 @@ const ResetPassword = () => {
     setMessage('');
 
     try {
-const response = await fetch(`${API_URL}/api/auth/reset-password/${token}`, {
+const response = await fetch(`${API_URL}/auth/reset-password/${token}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -278,7 +278,7 @@ const EmailVerification = () => {
 
   const verifyEmail = async () => {
     try {
-      const response = await fetch(`${API_URL}/api/auth/verify-email/${token}`);
+      const response = await fetch(`${API_URL}/auth/verify-email/${token}`);
       const result = await response.json();
       
       if (response.ok) {
@@ -362,7 +362,7 @@ const ChangePassword = ({ onClose }) => {
 
     try {
       const token = localStorage.getItem('token');
-const response = await fetch(`${API_URL}/api/auth/change-password`, {
+const response = await fetch(`${API_URL}/auth/change-password`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -548,7 +548,7 @@ const Dashboard = ({ user }) => {
       }
 
       console.log('🔍 Fetching user requests...');
-const response = await fetch(`${API_URL}/api/citizen/requests`, {
+const response = await fetch(`${API_URL}/citizen/requests`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -804,7 +804,7 @@ const ServiceRequest = () => {
 
     console.log('📤 Sending FormData with image support...');
     
-const response = await fetch(`${API_URL}/api/citizen/requests`, {
+const response = await fetch(`${API_URL}/citizen/requests`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -1170,7 +1170,7 @@ const Login = ({ onLogin }) => {
     try {
       console.log('🚀 Attempting login with REAL backend API...');
       
-const response = await fetch(`${API_URL}/api/auth/login`, {
+const response = await fetch(`${API_URL}/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -1347,7 +1347,7 @@ const Register = ({ onRegister }) => {
     try {
       console.log('🚀 Attempting registration with REAL backend API...');
       
-const response = await fetch(`${API_URL}/api/auth/register`, {
+const response = await fetch(`${API_URL}/auth/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
