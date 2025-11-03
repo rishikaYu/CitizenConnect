@@ -2,6 +2,7 @@ import React, { useState, useEffect, createContext } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, Link, useLocation, useParams, useNavigate } from 'react-router-dom';
 import AdminDashboard from './AdminDashboard.js';
 const AuthContext = createContext();
+const API_URL = process.env.REACT_APP_API_URL;
 
 // Mock service
 const mockService = {

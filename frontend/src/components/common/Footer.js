@@ -1,5 +1,6 @@
 import React from 'react';
 import './Footer.css';
+const API_URL = process.env.REACT_APP_API_URL;
 
 const Footer = () => {
   return (

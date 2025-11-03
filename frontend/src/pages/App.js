@@ -2,6 +2,7 @@ import React, { useState, useEffect, createContext } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, Link, useLocation, useParams, useNavigate } from 'react-router-dom';
 import AdminDashboard from './AdminDashboard.js';
 const AuthContext = createContext();
+const API_URL = process.env.REACT_APP_API_URL;
 
 // Mock service
 const mockService = {
@@ -1728,17 +1729,12 @@ const Profile = ({ user, onUpdateProfile }) => {
 
 // Protected Route Component 
 const ProtectedRoute = ({ children, user }) => {
-  const storedUser = localStorage.getItem('user');
-  const storedToken = localStorage.getItem('token');
-  
-  const isAuthenticated = storedUser && storedToken;
-  
-  if (!isAuthenticated) {
-    return <Navigate to="/login" />;
+  if (!user) {
+    return <Navigate to="/login" replace />;
   }
-  
   return children;
 };
+
 
 // Main App Component
 function App() {
@@ -1772,7 +1768,11 @@ function App() {
 
   const handleUpdateProfile = (profileData) => {
     setUser(prev => ({ ...prev, ...profileData }));
-    localStorage.setItem('user', JSON.stringify({ ...user, ...profileData }));
+setUser(prev => {
+  const updated = { ...prev, ...profileData };
+  localStorage.setItem('user', JSON.stringify(updated));
+  return updated;
+});
   };
 
   return (

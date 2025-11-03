@@ -1,5 +1,6 @@
 import React from 'react';
 import './Modal.css';
+const API_URL = process.env.REACT_APP_API_URL;
 
 const Modal = ({ show, onClose, title, children, size = 'md' }) => {
   if (!show) return null;

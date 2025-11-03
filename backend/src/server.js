@@ -21,8 +21,7 @@ const corsOptions = {
   origin: [
     'http://localhost:3000',
     'http://127.0.0.1:3000',
-    'https://citizen-connect-nu.vercel.app',   // your frontend deployed
-    'https://citizenconnect-backend.onrender.com' // ✅ allow backend origin too
+    'https://citizen-connect-nu.vercel.app',
   ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
@@ -31,6 +30,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));
+
 
 // Define PORT and HOST
 const PORT = process.env.PORT || 5001;
