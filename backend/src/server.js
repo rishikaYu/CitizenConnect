@@ -17,27 +17,44 @@ dotenv.config();
 const app = express();
 
 
-
 const corsOptions = {
   origin: (origin, callback) => {
-    // Allow requests with no origin (Postman, server-to-server)
+    // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
-
-    // Allow localhost and all vercel.app domains
-    if (origin === 'http://localhost:3000' || origin.endsWith('.vercel.app')) {
+    
+    // List of allowed origins
+    const allowedOrigins = [
+      'http://localhost:3000',
+      'http://127.0.0.1:3000',
+      'https://citizenconnect-9.onrender.com', // Your backend URL
+      '/\.onrender\.com$/', // Any Render.com subdomain
+      '/\.vercel\.app$/',   // Any Vercel subdomain
+      'citizen-connect-kb2429kup-rishika-akunurus-projects.vercel.app',// Add your frontend domain here when you deploy it
+    ];
+    
+    // Check if the origin is allowed
+    if (allowedOrigins.some(allowed => {
+      if (typeof allowed === 'string') {
+        return origin === allowed;
+      }
+      return allowed.test(origin);
+    })) {
       callback(null, true);
     } else {
+      console.log('🚫 CORS blocked origin:', origin);
       callback(new Error('Not allowed by CORS'));
     }
   },
-  credentials: true, // allow cookies/auth headers
+  credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 };
 
+// Apply CORS for all routes and all methods
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));
 
+// Ensure OPTIONS requests get proper headers
+app.options('*', cors(corsOptions));
 // Define PORT and HOST
 const PORT = process.env.PORT || 5001;
 //const HOST = '0.0.0.0';// Get __dirname equivalent for ES modules
@@ -85,7 +102,8 @@ app.get("/test-db", async (req, res) => {
   }
 });
 // Debug route to check uploads directory
-app.get('/api/debug-uploads', (req, res) => {
+app.get('/api/debug-uploads', (req,
+   res) => {
   try {
     const files = fs.readdirSync(uploadsDir);
     const fileDetails = files.map(file => {
