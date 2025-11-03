@@ -16,17 +16,7 @@ dotenv.config();
 // Initialize Express app
 const app = express();
 
-// Define PORT and HOST
-const PORT = process.env.PORT || 5001;
-//const HOST = '0.0.0.0';// Get __dirname equivalent for ES modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
-// ========================
-// MIDDLEWARE SETUP
-// ========================
-
-// CORS configuration
 const corsOptions = {
   origin: [
     'http://localhost:3000',
@@ -41,6 +31,17 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));
+
+// Define PORT and HOST
+const PORT = process.env.PORT || 5001;
+//const HOST = '0.0.0.0';// Get __dirname equivalent for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// ========================
+// MIDDLEWARE SETUP
+// ========================
+
 
 // Body parsing middleware
 app.use(express.json({ limit: '10mb' }));
