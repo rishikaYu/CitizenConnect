@@ -8,7 +8,7 @@ A full-stack web application that enables citizens to submit municipal service r
 
 ## Live Demo
 Frontend:https://citizen-connect-ghjt.vercel.app/login
-Backend API:https://citizenconnect-9.onrender.com
+Backend:https://citizenconnect-9.onrender.com
 
 ## Features
 
@@ -41,7 +41,7 @@ React Frontend → Express REST API → PostgreSQL Database
 - PostgreSQL
 
 ### Backend Setup
-```bash**
+bash
 cd backend
 npm install
 
