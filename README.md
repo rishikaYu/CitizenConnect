@@ -10,6 +10,9 @@ A full-stack web application that enables citizens to submit municipal service r
 Frontend:https://citizen-connect-ghjt.vercel.app/login
 Backend:https://citizenconnect-9.onrender.com
 
+Test Credentials:
+username(citizen) : testuser@gmail.com Password: TestUser@1234
+username(Admin) : admin@citizenconnect.com Password : admin@123
 ## Features
 
 ### Citizen Portal
